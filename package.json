@@ -1,0 +1,28 @@
+{
+    "name": "genie-template-syntax-highlighting",
+    "displayName": "Genie Template Syntax Highlighting",
+    "description": "Syntax highlighting for the templates language for Genie open virtual assistant",
+    "version": "0.0.1",
+    "engines": {
+        "vscode": "^1.68.0"
+    },
+    "categories": [
+        "Programming Languages"
+    ],
+    "contributes": {
+        "languages": [{
+            "id": "genie",
+            "aliases": ["genie", "genie"],
+            "extensions": ["genie"],
+            "configuration": "./language-configuration.json"
+        }],
+        "grammars": [{
+            "language": "genie",
+            "scopeName": "source.genie",
+            "path": "./syntaxes/genie.tmLanguage.json",
+            "embeddedLanguages": {
+                "meta": "javascript"
+            }
+        }]
+    }
+}

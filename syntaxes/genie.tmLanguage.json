@@ -1,0 +1,152 @@
+{
+	"$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+	"name": "genie",
+	"patterns": [
+		{
+			"include": "#keywords"
+		},
+		{
+			"include": "#strings"
+		},
+		{
+			"include": "#operators"
+		},
+		{
+			"include": "#comment"
+		}
+	],
+	"repository": {
+		"comment": {
+			"patterns": [
+				{
+					"include": "#single-line-comment"
+				}
+			]
+		},
+		"single-line-comment": {
+			"begin": "(^[ \\t]+)?((//)(?:\\s*((@)internal)(?=\\s|$))?)",
+			"beginCaptures": {
+				"1": {
+					"name": "punctuation.whitespace.comment.leading.genie"
+				},
+				"2": {
+					"name": "comment.line.double-slash.genie"
+				},
+				"3": {
+					"name": "punctuation.definition.comment.genie"
+				},
+				"4": {
+					"name": "storage.type.internaldeclaration.genie"
+				},
+				"5": {
+					"name": "punctuation.decorator.internaldeclaration.genie"
+				}
+			},
+			"end": "(?=^)",
+			"contentName": "comment.line.double-slash.genie"
+		},
+		"keywords": {
+			"patterns": [{
+				"name": "keyword.control.genie",
+				"match": "\\b(if|while|for|return|import|const|let|as|function|from)\\b"
+			}]
+		},
+		"strings": {
+			"patterns": [
+				{
+					"include": "#string-single"
+				},
+				{
+					"include": "#string-double"
+				}
+			]
+		},
+		"string-double": {
+			"name": "string.quoted.double.genie",
+			"begin": "\"",
+			"beginCaptures": {
+				"0": {
+					"name": "punctuation.definition.string.begin.genie"
+				}
+			},
+			"end": "(\")|((?:[^\\\\\\n])$)",
+			"endCaptures": {
+				"1": {
+					"name": "punctuation.definition.string.end.genie"
+				},
+				"2": {
+					"name": "invalid.illegal.newline.genie"
+				}
+			},
+			"patterns": [
+				{
+					"include": "#string-character-escape"
+				}
+			]
+		},
+		"string-single": {
+			"name": "string.quoted.single.genie",
+			"begin": "'",
+			"beginCaptures": {
+				"0": {
+					"name": "punctuation.definition.string.begin.genie"
+				}
+			},
+			"end": "(\\')|((?:[^\\\\\\n])$)",
+			"endCaptures": {
+				"1": {
+					"name": "punctuation.definition.string.end.genie"
+				},
+				"2": {
+					"name": "invalid.illegal.newline.genie"
+				}
+			},
+			"patterns": [
+				{
+					"include": "#string-character-escape"
+				}
+			]
+		},
+		"string-character-escape": {
+			"name": "constant.character.escape.genie",
+			"match": "\\\\(x[0-9A-Fa-f]{2}|u[0-9A-Fa-f]{4}|u\\{[0-9A-Fa-f]+\\}|[0-2][0-7]{0,2}|3[0-6][0-7]?|37[0-7]?|[4-7][0-7]?|.|$)"
+		}, 
+		"operators": {
+			"patterns":[
+				{
+					"match": "%=|\\+=|-=|\\*=|(?<!\\()/=",
+					"name": "keyword.operator.assignment.compound.genie"
+				},
+				{
+					"match": "&=|\\^=|<<=|>>=|\\|=",
+					"name": "keyword.operator.assignment.compound.bitwise.genie"
+				},
+				{
+					"match": "<<|>>",
+					"name": "keyword.operator.bitwise.shift.genie"
+				},
+				{
+					"match": "!=|<=|>=|==|<|>",
+					"name": "keyword.operator.comparison.genie"
+				},
+				{
+					"match": "&&|!|\\|\\|",
+					"name": "keyword.operator.logical.genie"
+				},
+				{
+					"match": "&|\\||\\^|~",
+					"name": "keyword.operator.genie"
+				},
+				{
+					"match": "=",
+					"name": "keyword.operator.assignment.genie"
+				},
+				{
+					"match": "%|\\*|/|-|\\+",
+					"name": "keyword.operator.genie"
+				}
+			]
+		}
+	},
+	"scopeName": "source.genie"
+}
